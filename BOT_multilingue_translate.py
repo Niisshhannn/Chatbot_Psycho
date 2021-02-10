@@ -6,6 +6,7 @@ import pandas as pd
 sentence_bert_model = SentenceTransformer('bert-base-nli-mean-tokens')
 translator = google_translator()
 
+
 def get_data(path):
     psycho_frame = pd.read_csv(path, sep=';', names=['Question', 'Reponse'])
     return psycho_frame
@@ -18,7 +19,7 @@ def get_list(path_input):
     return question_list, reponse_list
 
 
-def get_embedding(path_input):
+def process_embedding(path_input):
     question_list, reponse_list = get_list(path_input)
     question_embedding = sentence_bert_model.encode(question_list)
     reponse_embedding = sentence_bert_model.encode(reponse_list)
@@ -34,15 +35,14 @@ def cosine_similarity(vector_a, vector_b):
     return sim
 
 
-def get_similarity(vector_a, liste):
+def get_similarity_max(vector_a, liste):
     sim_list = []
     for ele in liste:
         sim = cosine_similarity(vector_a, sentence_bert_model.encode([ele])[0])
         sim_list.append(sim)
-    df_sentence = pd.DataFrame(liste)
-    df_sim = pd.DataFrame(sim_list)
-    df = pd.concat([df_sentence, df_sim], axis=1, ignore_index=False)
-    return df
+    max = max(sim_list)
+    idx = sim_list.index(max)
+    return max, idx
 
 
 def welcome_bot():
@@ -61,18 +61,14 @@ def feedback_welcome():
 
 
 def get_reponse(query_vect, question_list, reponse_list):
-    distance_query_question = get_similarity(query_vect, question_list)
-    distance_query_reponse = get_similarity(query_vect, reponse_list)
-    distance_question_max = max(distance_query_question)
-    distance_reponse_max = max(distance_query_reponse)
-    if distance_question_max < distance_reponse_max:
-        question_simi_index = distance_query_question.index(
-            distance_question_max)
-        return reponse_list[question_simi_index]
+    sim_query_question_max, idx_qq = get_similarity_max(
+        query_vect, question_list)
+    sim_query_reponse_max, idx_qr = get_similarity_max(
+        query_vect, reponse_list)
+    if sim_query_question_max < sim_query_reponse_max:
+        return reponse_list[idx_qq]
     else:
-        question_simi_index = distance_query_reponse.index(
-            distance_reponse_max)
-        return reponse_list[question_simi_index]
+        return reponse_list[idx_qr]
 
 
 def communication(query):
@@ -96,7 +92,7 @@ if __name__ == '__main__':
 
     datapath = 'data/Q_R_en.csv'
     question_list, reponse_list = get_list(datapath)
-    get_embedding(datapath)
+    process_embedding(datapath)
 
     while True:
         query = input()
