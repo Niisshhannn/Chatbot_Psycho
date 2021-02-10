@@ -46,18 +46,18 @@ def get_similarity_max(vector_a, liste):
 
 
 def welcome_bot():
-    content = 'Hello, I am a baby of mom Shanshan and dad Cancan, I can speak French, Chinese and English, what language do you speak? Please input en or ch or fr "'
+    content = 'BOT : Hello, I am a baby of mom Shanshan and dad Cancan, I can speak French, Chinese and English, what language do you speak? Please input en or ch or fr "'
     return content
 
 
 def feedback_welcome():
     language = input()
     if language == 'fr':
-        return "D'accord, qu'est-ce que je peux vous aider ?"
+        return "BOT: D'accord, qu'est-ce que je peux vous aider ?"
     if language == 'zh':
-        return "好的，请问有什么可以帮助您的呢？"
+        return "BOT: 好的，请问有什么可以帮助您的呢？"
     if language == 'en':
-        return "Okay, what can I help you with?"
+        return "BOT: Okay, what can I help you with?"
 
 
 def get_reponse(query_vect, question_list, reponse_list):
@@ -72,20 +72,21 @@ def get_reponse(query_vect, question_list, reponse_list):
 
 
 def communication(query):
-    if "bye" in query:
-        return 'Bye !'
-    else:
-        query_language = translator.detect(query)
-        query_en = translator.translate(
-            query, lang_src=query_language, lang_tgt='en')
-        query_vect = sentence_bert_model.encode([query_en])[0]
-        reponse = get_reponse(query_vect, question_list, reponse_list)
-        reponse_translate = translator.translate(
-            reponse, lang_src='en', lang_tgt=query_language)
-    return reponse_translate
+    query_language = translator.detect(query)
+    query_en = translator.translate(
+        query, lang_src=query_language, lang_tgt='en')
+    query_vect = sentence_bert_model.encode([query_en])[0]
+    reponse = get_reponse(query_vect, question_list, reponse_list)
+    reponse_translate = translator.translate(
+        reponse, lang_src='en', lang_tgt=query_language)
+    feedback = "BOT: " + reponse_translate
+    return feedback
 
 
-if __name__ == '__main__':
+def bye_feedback():
+    return 'Bye'
+
+def chatbot():
 
     welcome_bot()
     feedback_welcome()
@@ -95,5 +96,15 @@ if __name__ == '__main__':
     process_embedding(datapath)
 
     while True:
-        query = input()
-        communication(query)
+        try:
+            query = input('You : ')
+            if 'bye' in query:
+                bye_feedback()
+                break
+            else:
+                communication(query)
+        except (KeyboardInterrupt, EOFError, SystemExit):
+            break
+
+if __name__ == '__main__':
+    chatbot()
