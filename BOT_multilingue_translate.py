@@ -49,45 +49,67 @@ def get_similarity_max(vector_a, liste):
 
 
 def welcome_bot():
-    content = "Hello, my name is Melody, I'm the baby of mom Shanshan and dad Cancan, I can speak French, Chinese and English, what language do you speak? Please input en or ch or fr "
+    content = "Hello, my name is Melody, I'm the baby of mom Shanshan and dad Cancan, I can speak French, Chinese and English, what language do you speak? Please input en or zh or fr "
     print("BOT: ", content)
     # return content
 
 
 def feedback_welcome(language):
     if language == 'fr':
-        print("BOT : D'accord, qu'est-ce que je peux vous aider ? ")
+        print("BOT : D'accord, vous avez choisir la langue française, qu'est-ce que je peux vous aider ? ")
         # return "D'accord, qu'est-ce que je peux vous aider ? "
     if language == 'zh':
-        print("BOT : 好的，请问有什么可以帮助您的呢？")
+        print("BOT : 好的，您选择了中文服务，请问有什么可以帮助您的呢？")
         # return "好的，请问有什么可以帮助您的呢？"
     if language == 'en':
-        print("BOT : Okay, what can I help you with ? ")
+        print("BOT : Okay, you have choisen English, what can I help you with ? ")
         # return "Okay, what can I help you with ? "
 
 
-def feedback_bye():
-    print('BOT : Bye ! Have a nice day !')
-    # return 'Bye ! Have a nice day !'
+def feedback_bye(language):
+    if language == 'fr':
+        print('BOT : Au revoir ! Bonne journée !')
+    if language == 'zh':
+        print('BOT : 再见，祝您拥有愉快的一天 ！')
+    if language == 'en':
+        print('BOT : Bye ! Have a nice day !')
 
 # three buttons to classify questions
 
 
-def type_choix(psy_df, other_df, drug_df):
-    print('select your type for consulting : psychology, drug, others')
+def feedback_type(language):
+    if language == 'fr':
+        print('Veillez choisir le domaine à consulter : psychology, drug, others')
+    if language == 'zh':
+        print('请选择您想咨询的领域 ： 心理咨询（psychology）, 药品咨询(drug), 其他(others)')
+    if language == 'en':
+        print('Please select your type for consulting : psychology, drug, others')
+
+
+def feedback_question(language):
+    if language == 'fr':
+        print('maintenant vous pouvez entrer votre question')
+    if language == 'zh':
+        print('请您输入您想问的问题')
+    if language == 'en':
+        print('now you can entrer your questions.')
+
+
+def type_choix(psy_df, other_df, drug_df, language):
+    feedback_type(language)
     type_ch = input()
     print('YOU : ', type_ch)
     if type_ch == 'psychology':
         question_list, answer_list = get_list(psy_df)
-        print('now you can entrer your questions.')
+        feedback_question(language)
         return question_list, answer_list
     if type_ch == 'others':
         question_list, answer_list = get_list(other_df)
-        print('now you can entrer your questions.')
+        feedback_question(language)
         return question_list, answer_list
     if type_ch == 'drug':
         question_list, answer_list = get_list(drug_df)
-        print('now you can entrer your questions.')
+        feedback_question(language)
         return question_list, answer_list
 
 
@@ -119,10 +141,10 @@ def communication(language, query, question_list, answer_list):
         query_vect = sentence_bert_model.encode([query])[0]
         answer = get_answer(query_vect, question_list, answer_list)
         if not answer == 'No answer' or 'Unanswerable':
+            print(answer)
+        else:
             print(
                 "BOT : Sorry, I don't know how to answer this question, but I will try hard to learn it.")
-        else:
-            print(answer)
     # return "Sorry, I don't know how to answer this question, but I will try hard to learn it."
     # return answer_translate
 
@@ -139,13 +161,14 @@ def chatbot():
     feedback_welcome(language)
 
     question_list, answer_list = type_choix(
-        psycho_frame, other_frame, drug_frame)
+        psycho_frame, other_frame, drug_frame, language)
 
     while True:
         try:
             query = input()
+            print('YOU : ', query)
             if 'bye' in query:
-                feedback_bye()
+                feedback_bye(language)
                 break
             else:
                 communication(language, query, question_list, answer_list)
