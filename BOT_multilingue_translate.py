@@ -1,18 +1,12 @@
-from sentence_transformers import SentenceTransformer
 from google_trans_new import google_translator
+from sentence_transformers import SentenceTransformer, util
+#from scipy.spatial.distance import cosine
+from training_model import get_dataframe, get_list
 import numpy as np
-import pandas as pd
 
-sentence_bert_model = SentenceTransformer('bert-base-nli-mean-tokens')
-#sentence_bert_model = SentenceTransformer('paraphrase-distilroberta-base-v1')
 translator = google_translator()
-
-# data process
-
-
-def get_dataframe(path):
-    df = pd.read_csv(path, sep=';', names=['Question', 'Type', 'Answer'])
-    return df
+#sentence_bert_model = np.load('model/embedding.npy')
+sentence_bert_model = SentenceTransformer('bert-base-nli-mean-tokens')
 
 
 def classify_data(df):
@@ -22,23 +16,9 @@ def classify_data(df):
         df['Type'] != 'not_drug_question')]
     return psycho_frame, other_frame, drug_frame
 
-
-def get_list(df):
-    question_list = df['Question'].to_list()
-    answer_list = df['Answer'].to_list()
-    return question_list, answer_list
-
-# transfer sentence to vector
-
-
-def process_embedding(df):
-    question_list, answer_list = get_list(df)
-    answer_list = [str(i) for i in answer_list]
-    sentence_bert_model.encode(question_list)
-    sentence_bert_model.encode(answer_list)
-
-
 # calculate similarity between two vectors
+
+
 def cosine_similarity(vector_a, vector_b):
     vector_a = np.mat(vector_a)
     vector_b = np.mat(vector_b)
@@ -49,11 +29,19 @@ def cosine_similarity(vector_a, vector_b):
     return sim
 
 
+def get_cosin_sim(vector_a, vector_b):
+    #sim = 1 - cosine(vector_a, vector_b)
+    return util.pytorch_cos_sim(vector_a, vector_b)
+
+
 # get the biggest similarity and its index in a list of sentence
+
+
 def get_similarity_max(vector_a, liste):
     sim_list = []
     for ele in liste:
-        sim = cosine_similarity(vector_a, sentence_bert_model.encode([ele])[0])
+        #sim = cosine_similarity(vector_a, sentence_bert_model.encode([ele])[0])
+        sim = get_cosin_sim(vector_a, sentence_bert_model.encode([ele])[0])
         sim_list.append(sim)
     max_sim = max(sim_list)
     idx = sim_list.index(max_sim)
@@ -61,36 +49,45 @@ def get_similarity_max(vector_a, liste):
 
 
 def welcome_bot():
-    content = 'Hello, I am a baby of mom Shanshan and dad Cancan, I can speak French, Chinese and English, what language do you speak? Please input en or ch or fr '
-    return content
+    content = "Hello, my name is Melody, I'm the baby of mom Shanshan and dad Cancan, I can speak French, Chinese and English, what language do you speak? Please input en or ch or fr "
+    print("BOT: ", content)
+    # return content
 
 
-def feedback_welcome():
-    language = input()
+def feedback_welcome(language):
     if language == 'fr':
-        return "D'accord, qu'est-ce que je peux vous aider ? "
+        print("BOT : D'accord, qu'est-ce que je peux vous aider ? ")
+        # return "D'accord, qu'est-ce que je peux vous aider ? "
     if language == 'zh':
-        return "好的，请问有什么可以帮助您的呢？"
+        print("BOT : 好的，请问有什么可以帮助您的呢？")
+        # return "好的，请问有什么可以帮助您的呢？"
     if language == 'en':
-        return "Okay, what can I help you with ? "
+        print("BOT : Okay, what can I help you with ? ")
+        # return "Okay, what can I help you with ? "
 
 
 def feedback_bye():
-    return 'Bye'
+    print('BOT : Bye ! Have a nice day !')
+    # return 'Bye ! Have a nice day !'
 
 # three buttons to classify questions
 
 
 def type_choix(psy_df, other_df, drug_df):
+    print('select your type for consulting : psychology, drug, others')
     type_ch = input()
+    print('YOU : ', type_ch)
     if type_ch == 'psychology':
         question_list, answer_list = get_list(psy_df)
+        print('now you can entrer your questions.')
         return question_list, answer_list
     if type_ch == 'others':
         question_list, answer_list = get_list(other_df)
+        print('now you can entrer your questions.')
         return question_list, answer_list
     if type_ch == 'drug':
         question_list, answer_list = get_list(drug_df)
+        print('now you can entrer your questions.')
         return question_list, answer_list
 
 
@@ -105,18 +102,29 @@ def get_answer(query_vect, question_list, answer_list):
         return answer_list[idx_qr]
 
 
-def communication(query, question_list, answer_list):
-    query_language = translator.detect(query)
-    query_en = translator.translate(
-        query, lang_src=query_language, lang_tgt='en')
-    query_vect = sentence_bert_model.encode([query_en])[0]
-    answer = get_answer(query_vect, question_list, answer_list)
-    if answer == 'No answer' or 'Unanswerable' or '':
-        return "Sorry, I don't know how to answer this question, but I will try hard to learn it."
+def communication(language, query, question_list, answer_list):
+    if not language == 'en':
+        query_en = translator.translate(
+            query, lang_src=language, lang_tgt='en')
+        query_vect = sentence_bert_model.encode([query_en])[0]
+        answer = get_answer(query_vect, question_list, answer_list)
+        if not answer == 'No answer' or 'Unanswerable':
+            answer_translate = translator.translate(
+                answer, lang_src='en', lang_tgt=language)
+            print(answer_translate)
+        else:
+            print(
+                "BOT : Sorry, I don't know how to answer this question, but I will try hard to learn it.")
     else:
-        answer_translate = translator.translate(
-            answer, lang_src='en', lang_tgt=query_language)
-        return answer_translate
+        query_vect = sentence_bert_model.encode([query])[0]
+        answer = get_answer(query_vect, question_list, answer_list)
+        if not answer == 'No answer' or 'Unanswerable':
+            print(
+                "BOT : Sorry, I don't know how to answer this question, but I will try hard to learn it.")
+        else:
+            print(answer)
+    # return "Sorry, I don't know how to answer this question, but I will try hard to learn it."
+    # return answer_translate
 
 
 def chatbot():
@@ -124,11 +132,11 @@ def chatbot():
     datapath = 'data/data_final.csv'
     data_frame = get_dataframe(datapath)
 
-    process_embedding(data_frame)
     psycho_frame, other_frame, drug_frame = classify_data(data_frame)
 
     welcome_bot()
-    feedback_welcome()
+    language = input()
+    feedback_welcome(language)
 
     question_list, answer_list = type_choix(
         psycho_frame, other_frame, drug_frame)
@@ -140,7 +148,7 @@ def chatbot():
                 feedback_bye()
                 break
             else:
-                communication(query, question_list, answer_list)
+                communication(language, query, question_list, answer_list)
         except (KeyboardInterrupt, EOFError, SystemExit):
             break
 
