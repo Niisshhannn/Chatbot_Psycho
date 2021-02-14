@@ -13,7 +13,7 @@ The project aims to create a chatbot for spiritual counseling. The project was c
 
 ## how to run projet front
 
-1. install node [website official](https://nodejs.org/en/) please install version LTS
+1. install node on the[website official](https://nodejs.org/en/),please install version-LTS
 2. cd to web
 3. run`npm install`
 4. waite for installing
