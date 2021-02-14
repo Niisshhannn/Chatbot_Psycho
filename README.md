@@ -23,7 +23,7 @@ The project aims to create a chatbot for spiritual counseling. The project was c
 ## How to run full projet
 
 1. cd to web
-2. run `npm run build` build projet
+2. run `npm run build` to pack the projet front
 3. cd root with: `cd ..`
 4. run server with command `python app.py`
 5. `http://localhost:5000`
