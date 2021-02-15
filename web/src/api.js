@@ -13,10 +13,6 @@ export function httpPost(url, body) {
   return fetch(url, opts).then((res) => res.json());
 }
 
-export function apiChatInit() {
-  return http("/api/init");
-}
-
-export function apiChat(msg) {
-  return httpPost("/api/chat", { msg });
+export function apiChat(msg, lang = "en", type = "") {
+  return httpPost("/api/chat", { msg, lang, type });
 }

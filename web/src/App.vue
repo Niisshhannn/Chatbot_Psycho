@@ -39,6 +39,6 @@ export default {
 
 .chat-view {
   max-width: 32%;
-  flex: auto;
+  flex: 1 0 32%;
 }
 </style>

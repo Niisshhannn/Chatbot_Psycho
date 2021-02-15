@@ -2,11 +2,11 @@
   <div class="chat-option">
     <div
       v-for="opt in options"
-      :key="opt"
+      :key="opt.key"
       class="opt-item"
       @click="handleClick(opt)"
     >
-      {{ opt }}
+      {{ opt.value }}
     </div>
   </div>
 </template>
@@ -16,7 +16,7 @@ export default {
   props: {
     options: {
       type: Array,
-      default: () => ["法语", "英语", "中文"],
+      default: () => [],
     },
   },
   methods: {

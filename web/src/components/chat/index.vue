@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <header>
-      这是聊天页
+      Palette
     </header>
 
     <main ref="chatContent">
@@ -41,6 +41,8 @@ export default {
     return {
       msgList: [], // { msg: '', dir: 'left' }
       options: [],
+      lang: "en", // 保存用户的语言
+      type: "", // 用户选择的类型
       showOptions: true, // 是否展示选项
     };
   },
@@ -56,17 +58,35 @@ export default {
       });
     },
   },
+  mounted() {
+    // 第一句
+    this.chat("#init");
+  },
   methods: {
+    chat(msg, lang, type) {
+      apiChat(msg, lang, type).then(this.handleResponse.bind(this));
+    },
     handleSend(value) {
       this.msgList.push({ msg: value, dir: "right" });
-
-      apiChat(value).then((res) => {
-        // 添加回复
-        this.msgList.push({ msg: res.msg, dir: "left" });
-      });
+      this.chat(value, this.lang, this.type);
     },
-    handleOption(value) {
-      console.log(value);
+    handleOption(opt) {
+      const { key } = opt;
+      if (["fr", "zh", "en"].includes(key)) {
+        // 说明用户在选语言
+        this.lang = key;
+        this.chat("#lang", key);
+      } else {
+        // 说明用户在选别的东西
+        this.type = key;
+        this.chat("#type", this.lang, key);
+      }
+    },
+    // 处理chatbot的回复
+    handleResponse(res) {
+      const { msg, options = [] } = res;
+      this.msgList.push({ msg: msg, dir: "left" });
+      this.options = options;
     },
   },
 };

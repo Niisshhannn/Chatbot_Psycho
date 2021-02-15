@@ -3,7 +3,7 @@
     <input
       class="input-inner"
       v-model="inputValue"
-      placeholder="请输入"
+      placeholder="Message..."
       autofocus="autofocus"
       @keyup.enter="handleSend"
     />
