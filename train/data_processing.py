@@ -51,7 +51,7 @@ joke_en_df = pd.concat([en_title_frame,en_body_frame],axis=1,ignore_index=False)
 joke_en_df.to_csv('./data/joke_en.csv',sep=';',header=True,index=False)
 
 # data - fr
-joke_fr_data = load_json('./data/json_fr.json')
+joke_fr_data = load_json('./data/joke_fr.json')
 
 fr_joke = []
 fr_answer = []
