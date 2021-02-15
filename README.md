@@ -4,11 +4,11 @@ The project aims to create a chatbot for spiritual counseling. The project was c
 
 ## Explication
 1. `data` Database
-2. `model` model training
-3. `server`web server and apllication code python
-4. `train` code python for chatbot
-5. `web` projet web
-6. `app.py` run server
+2. `model` Model training
+3. `server`Web server and application python code
+4. `train` Python code for chatbot
+5. `web` Projet web
+6. `app.py` Run server
 
 
 ## How to run Front-end
@@ -16,14 +16,14 @@ The project aims to create a chatbot for spiritual counseling. The project was c
 1. install node on the[website official](https://nodejs.org/en/),please install version-LTS
 2. cd to web
 3. run`npm install`
-4. waite for installing
+4. wait for installing
 5. run`npm run serve`
 6. open your web browser with `http://localhost:8080`
 
 ## How to run the full projet
 
 1. cd to web
-2. run `npm run build` to pack the projet front
-3. cd root with: `cd ..`
+2. run `npm run build` to pack the front-end
+3. cd to root
 4. run server with command `python app.py` or `python3 app.py` for python3
-5. `http://localhost:5000`
+5. open your web browser with `http://localhost:5000`
