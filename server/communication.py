@@ -14,10 +14,10 @@ def get_df():
     return df, q_df, a_df
 
 
-# obtenir trois dataframes
+# 获取三个DataFrame
 df, q_df, a_df = get_df()
 
-# pour trouver les réponses correspondants
+
 def get_ans(msg, typ):
     dfloc = df[df['Type'] == typ]
     all_index = dfloc.index
@@ -40,14 +40,14 @@ def get_ans(msg, typ):
         return None
     return df.loc[max_idx]['Answer']
 
-# retourner la réponse
+
 def core_fin(msg, typ):
     answer = get_ans(msg, typ)
     if answer is None or (answer != 'No answer' and answer != 'Unanswerable'):
         return answer
     return "Sorry, I can't answer this question, but I will try hard to learn it. ^_^ "
 
-# communication
+
 def communicate(msg, lang, typ):
     if lang == 'en':
         return core_fin(msg, typ)
