@@ -7,7 +7,6 @@ def get_cosin_sim(vector_a, vector_b):
     return util.pytorch_cos_sim(vector_a, vector_b)
 
 
-# 新的短命名
 def cos_sim(vector_a, vector_b):
     return util.pytorch_cos_sim(vector_a, vector_b)
 

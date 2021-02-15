@@ -20,7 +20,7 @@ OPTIONS_TYPE_EN = [{'key': 'psy', 'value': 'Psychology'},
                    {'key': 'others', 'value': 'Others'}]
 
 
-# 根据用户说的啥，啥语言，啥类型，返回一句话
+# retourner la réponse selon le choix de la langue et le type de client
 def chat(msg, lang, typ):
     '''
     参数说明:
@@ -33,11 +33,11 @@ def chat(msg, lang, typ):
     '''
     ret_msg = ''
     ret_opt = []
-    # 对话开始的标记
+    # le commencement de dialogue
     if msg == '#init':
         ret_msg = defmsg.MSG_WELCOME
         ret_opt = OPTIONS_LANG
-    # 选择对话语言之后的回复内容
+    # feedback après avoir choisi la langue
     elif msg == '#lang':
         if lang == 'zh':
             ret_msg = defmsg.MSG_FEEDBACK_WELCOME_CH
@@ -48,7 +48,7 @@ def chat(msg, lang, typ):
         else:
             ret_msg = defmsg.MSG_FEEDBACK_WELCOME_EN
             ret_opt = OPTIONS_TYPE_EN
-    # 选择类型之后的回复内容
+    # feedback après avoir choisi le type
     elif msg == '#type':
         if lang == 'zh':
             ret_msg = defmsg.MSG_FEEDBACK_QUESTION_CH
@@ -56,9 +56,9 @@ def chat(msg, lang, typ):
             ret_msg = defmsg.MSG_FEEDBACK_QUESTION_FR
         else:
             ret_msg = defmsg.MSG_FEEDBACK_QUESTION_EN
-    # 非标记符号即用户说的话
+    # feedback bye
     else:
-        bye = ['Au revoir', '再见', 'Bye', '拜拜', 'bye', 'byebye']
+        bye = ['Au revoir', '再见', 'Bye', '拜拜', 'bye', 'byebye','au revoir','salut']
         if msg in bye:
             if lang == 'zh':
                 ret_msg = defmsg.MSG_BYE_CH
