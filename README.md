@@ -36,6 +36,6 @@ The project aims to create a chatbot for spiritual counseling. The project was c
 
 1. cd to web
 2. run `npm run build` to pack the front-end
-3. cd to root
+3. cd to root with the command `cd ..` 
 4. run server with command `python app.py` or `python3 app.py` for python3
 5. open your web browser with `http://localhost:5000`
