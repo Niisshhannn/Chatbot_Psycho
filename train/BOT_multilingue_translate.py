@@ -162,10 +162,10 @@ def communication(language, query, question_list, answer_list):
 
 def chatbot():
     try:
-        datapath = './data/data_final.csv'
+        datapath = '../data/data_final.csv'
         data_frame = get_dataframe(datapath)
-        joke_fr_df = pd.read_csv('./data/joke_fr.csv', sep=';', header=0)
-        joke_en_df = pd.read_csv('./data/joke_en.csv', sep=';', header=0)
+        joke_fr_df = pd.read_csv('../data/joke_fr.csv', sep=';', header=0)
+        joke_en_df = pd.read_csv('../data/joke_en.csv', sep=';', header=0)
 
         psycho_frame, other_frame, drug_frame = classify_data(data_frame)
 
