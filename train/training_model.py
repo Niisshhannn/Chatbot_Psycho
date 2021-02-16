@@ -2,7 +2,6 @@ from sentence_transformers import SentenceTransformer
 import pandas as pd
 import numpy as np
 
-#sentence_bert_model = SentenceTransformer('bert-base-nli-mean-tokens')
 #sentence_bert_model = SentenceTransformer('paraphrase-distilroberta-base-v1')
 sentence_bert_model = SentenceTransformer('bert-base-nli-mean-tokens')
 

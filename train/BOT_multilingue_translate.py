@@ -1,24 +1,13 @@
 from google_trans_new import google_translator
 from sentence_transformers import SentenceTransformer, util
 #from scipy.spatial.distance import cosine
-#from training_model import get_dataframe, get_list
+from train.training_model import get_dataframe, get_list
 import numpy as np
 import pandas as pd
 
 translator = google_translator()
 #sentence_bert_model = np.load('model/embedding.npy')
 sentence_bert_model = SentenceTransformer('bert-base-nli-mean-tokens') # utiliser un modèle déjà entrainé
-
-# lecture des fichiers avec pandas
-def get_dataframe(path):
-    df = pd.read_csv(path, sep=';', names=['Question', 'Type', 'Answer'])
-    return df
-
-# diviser les deux listes
-def get_list(df):
-    question_list = df['Question'].to_list()
-    answer_list = df['Answer'].to_list()
-    return question_list, answer_list
 
 # diviser les trois types de questions
 def classify_data(df):
