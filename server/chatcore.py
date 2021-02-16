@@ -34,7 +34,7 @@ def chat(msg, lang, typ):
     '''
     ret_msg = ''
     ret_opt = []
-    # commencement de dialogue
+    # commencement du dialogue
     if msg == '#init':
         ret_msg = defmsg.MSG_WELCOME
         ret_opt = OPTIONS_LANG
