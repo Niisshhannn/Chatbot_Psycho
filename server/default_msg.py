@@ -1,6 +1,5 @@
-# 默认的话语
+# parole prédéfin
 
-# 打招呼的信息
 MSG_WELCOME = "Hello, my name is Palette,\
         I'm the baby of mom Shanshan and dad Cancan,\
         I can speak French, Chinese and English,\

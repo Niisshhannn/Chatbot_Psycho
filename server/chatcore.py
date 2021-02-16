@@ -19,25 +19,26 @@ OPTIONS_TYPE_EN = [{'key': 'psy', 'value': 'Psychology'},
                    {'key': 'drug', 'value': 'Drug'},
                    {'key': 'others', 'value': 'Others'}]
 
+# return a sentence according to language and type and what we say
 
-# 根据用户说的啥，啥语言，啥类型，返回一句话
+
 def chat(msg, lang, typ):
     '''
-    参数说明:
-        msg : 用户说的话
-        lang: 对应的语言       / 值可为空
-        typ : 选了哪个类型的对话 / 值可为空
-    返回值      : 返回字典
-        msg    : chatbot说的话
-        options: 可以给用户的选项 / 值可以为空
+    explication des paramètres:
+        msg : message de client
+        lang: la langue choisie  / valeur peut être vide
+        typ : le type choise / valeur peut être vide
+    valeur retourné      : retrouner un dictionnaire
+        msg    : parole de chatbot
+        options: les options pour les clients / les valeurs peut être vide
     '''
     ret_msg = ''
     ret_opt = []
-    # 对话开始的标记
+    # commencement de dialogue
     if msg == '#init':
         ret_msg = defmsg.MSG_WELCOME
         ret_opt = OPTIONS_LANG
-    # 选择对话语言之后的回复内容
+    # feedback après avoir choisi la langue
     elif msg == '#lang':
         if lang == 'zh':
             ret_msg = defmsg.MSG_FEEDBACK_WELCOME_CH
@@ -48,7 +49,7 @@ def chat(msg, lang, typ):
         else:
             ret_msg = defmsg.MSG_FEEDBACK_WELCOME_EN
             ret_opt = OPTIONS_TYPE_EN
-    # 选择类型之后的回复内容
+    # feedback après avoir choisi le type
     elif msg == '#type':
         if lang == 'zh':
             ret_msg = defmsg.MSG_FEEDBACK_QUESTION_CH
@@ -56,7 +57,7 @@ def chat(msg, lang, typ):
             ret_msg = defmsg.MSG_FEEDBACK_QUESTION_FR
         else:
             ret_msg = defmsg.MSG_FEEDBACK_QUESTION_EN
-    # 非标记符号即用户说的话
+    # feedback bye
     else:
         bye = ['Au revoir', '再见', 'Bye', '拜拜', 'bye',
                'byebye', 'au revoir', 'salut', 'Salut']

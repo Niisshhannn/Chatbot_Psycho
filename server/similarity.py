@@ -7,11 +7,10 @@ def get_cosin_sim(vector_a, vector_b):
     return util.pytorch_cos_sim(vector_a, vector_b)
 
 
-# 新的短命名
 def cos_sim(vector_a, vector_b):
     return util.pytorch_cos_sim(vector_a, vector_b)
 
-
+# obtenir la similarité maximun
 def get_similarity_max(vector_a, liste):
     sim_list = []
     for ele in liste:
@@ -32,7 +31,7 @@ def get_answer(query_vect, question_list, answer_list):
     else:
         return answer_list[idx_qr]
 
-
+# converti une phrase vers le vectors
 def get_embedding(sentence):
     vec = sentence_bert_model.encode([sentence])[0]
     return vec
