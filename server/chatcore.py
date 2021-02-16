@@ -5,7 +5,7 @@ from server.communication import communicate
 def joke(lang):
     pass
 
-
+# boutons
 OPTIONS_LANG = [{'key': 'fr', 'value': 'Français'},
                 {'key': 'zh', 'value': '中文'},
                 {'key': 'en', 'value': 'English'}]
