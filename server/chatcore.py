@@ -60,7 +60,7 @@ def chat(msg, lang, typ):
     # feedback bye
     else:
         bye = ['Au revoir', '再见', 'Bye', '拜拜', 'bye',
-               'byebye', 'au revoir', 'salut', 'Salut']
+               'byebye', 'au revoir', 'salut', 'Salut', 'Au revoir !', 'bye!', '再见！']
         if msg in bye:
             if lang == 'zh':
                 ret_msg = defmsg.MSG_BYE_CH
