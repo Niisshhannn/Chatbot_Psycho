@@ -20,8 +20,6 @@ OPTIONS_TYPE_EN = [{'key': 'psy', 'value': 'Psychology'},
                    {'key': 'others', 'value': 'Others'}]
 
 # return a sentence according to language and type and what we say
-
-
 def chat(msg, lang, typ):
     '''
     explication des paramètres:
