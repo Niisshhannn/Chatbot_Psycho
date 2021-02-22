@@ -30,3 +30,15 @@ MSG_FEEDBACK_QUESTION_CH = "请您输入您想问的问题"
 MSG_FEEDBACK_QUESTION_EN = "Now you can entrer your questions"
 
 MSG_ERROR = "Sorry, I've met somes problems, I'll ask my mama and papa for help me."
+
+MSG_FEEDBACK_EMM_EN = "What do you mean ?"
+
+MSG_FEEDBACK_EMM_FR = "Qu'est-ce que vous voulez dire ?"
+
+MSG_FEEDBACK_EMM_CH = "请问您想表达什么呢 ?"
+
+MSG_FEEDBACK_TKS_EN = "You're welcome."
+
+MSG_FEEDBACK_TKS_FR = "Je vous en prie."
+
+MSG_FEEDBACK_TKS_CH = "不用客气，希望能帮到您。"

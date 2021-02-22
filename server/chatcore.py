@@ -6,6 +6,8 @@ def joke(lang):
     pass
 
 # boutons
+
+
 OPTIONS_LANG = [{'key': 'fr', 'value': 'Français'},
                 {'key': 'zh', 'value': '中文'},
                 {'key': 'en', 'value': 'English'}]
@@ -14,12 +16,16 @@ OPTIONS_TYPE_CH = [{'key': 'psy', 'value': '心理咨询'},
                    {'key': 'others', 'value': '其他问题'}]
 OPTIONS_TYPE_FR = [{'key': 'psy', 'value': 'Psychologie'},
                    {'key': 'drug', 'value': 'Drogue'},
-                   {'key': 'others', 'value': 'Autres'}]
+                   {'key': 'others', 'value': 'Autres'},
+                   {'key': 'joke', 'value': 'Blagues'}]
 OPTIONS_TYPE_EN = [{'key': 'psy', 'value': 'Psychology'},
                    {'key': 'drug', 'value': 'Drug'},
-                   {'key': 'others', 'value': 'Others'}]
+                   {'key': 'others', 'value': 'Others'},
+                   {'key': 'joke', 'value': 'Jokes'}]
 
 # return a sentence according to language and type and what we say
+
+
 def chat(msg, lang, typ):
     '''
     explication des paramètres:
@@ -58,7 +64,10 @@ def chat(msg, lang, typ):
     # feedback bye
     else:
         bye = ['Au revoir', '再见', 'Bye', '拜拜', 'bye',
-               'byebye', 'au revoir', 'salut', 'Salut', 'Au revoir !', 'bye!', '再见！']
+               'byebye', 'au revoir', 'salut', 'Salut']
+        emm = ['emmmmm', 'emm', 'emmm', 'emmmm', 'euh', '呃', 'Euh']
+        tks = ['谢谢', 'merci', 'Merci', 'Merci beaucoup', 'merci beaucoup',
+               'Thanks', 'Thank you so much', 'thanks', 'thank you so much']
         if msg in bye:
             if lang == 'zh':
                 ret_msg = defmsg.MSG_BYE_CH
@@ -66,6 +75,20 @@ def chat(msg, lang, typ):
                 ret_msg = defmsg.MSG_BYE_FR
             else:
                 ret_msg = defmsg.MSG_BYE_EN
+        elif msg in emm:
+            if lang == 'zh':
+                ret_msg = defmsg.MSG_FEEDBACK_EMM_CH
+            elif lang == 'fr':
+                ret_msg = defmsg.MSG_FEEDBACK_EMM_FR
+            else:
+                ret_msg = defmsg.MSG_FEEDBACK_EMM_EN
+        elif msg in tks:
+            if lang == 'zh':
+                ret_msg = defmsg.MSG_FEEDBACK_TKS_CH
+            elif lang == 'fr':
+                ret_msg = defmsg.MSG_FEEDBACK_TKS_FR
+            else:
+                ret_msg = defmsg.MSG_FEEDBACK_TKS_EN
         else:
             ret_msg = communicate(msg, lang, typ)
 
