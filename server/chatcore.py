@@ -1,38 +1,7 @@
 import server.default_msg as defmsg
 from server.communication import communicate
+import server.default_opt as defopt
 
-
-def joke(lang):
-    pass
-
-# boutons
-
-OPTIONS_LANG = [{'key': 'fr', 'value': 'Français'},
-                {'key': 'zh', 'value': '中文'},
-                {'key': 'en', 'value': 'English'}]
-OPTIONS_TYPE_CH = [{'key': 'psy', 'value': '心理咨询'},
-                   {'key': 'drug', 'value': '药物咨询'},
-                   {'key': 'others', 'value': '其他问题'}]
-OPTIONS_TYPE_FR = [{'key': 'psy', 'value': 'Psychologie'},
-                   {'key': 'drug', 'value': 'Drogue'},
-                   {'key': 'others', 'value': 'Autres'},
-                   {'key': 'joke', 'value': 'Blagues'}]
-OPTIONS_TYPE_EN = [{'key': 'psy', 'value': 'Psychology'},
-                   {'key': 'drug', 'value': 'Drug'},
-                   {'key': 'others', 'value': 'Others'},
-                   {'key': 'joke', 'value': 'Jokes'}]
-OPTION_RETURN_CH = [{'key': 'back_lang', 'value': '重新选择语言'},
-                    {'key': 'back_type', 'value': '重新选择类型'}]
-OPTION_RETURN_FR = [{'key': 'back_lang', 'value': 'Rechoisir la langue'},
-                    {'key': 'back_type', 'value': 'Rechoisir le type'}]
-OPTION_RETURN_EN = [{'key': 'back_lang', 'value': 'Back to chose language'},
-                    {'key': 'back_type', 'value': 'Back to chose type'}]
-OPTION_RETURN_JOKE_FR = [{'key': 'back_lang', 'value': 'Rechoisir la langue'},
-                         {'key': 'back_type', 'value': 'Rechoisir le type'},
-                         {'key': 'joke', 'value': 'Une blague plus'}]
-OPTION_RETURN_EN = [{'key': 'back_lang', 'value': 'Back to chose language'},
-                    {'key': 'back_type', 'value': 'Back to chose type'},
-                    {'key': 'bakc_type', 'value': 'One more joke'}]
 
 # return a sentence according to language and type and what we say
 
@@ -50,28 +19,30 @@ def chat(msg, lang, typ):
     ret_msg = ''
     ret_opt = []
     # commencement du dialogue
+
+    def judge_lang(a_dict: dict):
+        return a_dict[lang] if a_dict[lang] else a_dict['en']
+
     if msg == '#init':
         ret_msg = defmsg.MSG_WELCOME
-        ret_opt = OPTIONS_LANG
+        ret_opt = defopt.OPTIONS_LANG
     # feedback après avoir choisi la langue
     elif msg == '#lang':
-        if lang == 'zh':
-            ret_msg = defmsg.MSG_FEEDBACK_WELCOME_CH
-            ret_opt = OPTIONS_TYPE_CH
-        elif lang == 'fr':
-            ret_msg = defmsg.MSG_FEEDBACK_WELCOME_FR
-            ret_opt = OPTIONS_TYPE_FR
-        else:
-            ret_msg = defmsg.MSG_FEEDBACK_WELCOME_EN
-            ret_opt = OPTIONS_TYPE_EN
+        ret_msg = judge_lang(defmsg.MSG_FEEDBACK_WELCOME_DICT)
+        ret_opt = judge_lang(defopt.OPTIONS_TYPE_DICT)
     # feedback après avoir choisi le type
     elif msg == '#type':
-        if lang == 'zh':
-            ret_msg = defmsg.MSG_FEEDBACK_QUESTION_CH
-        elif lang == 'fr':
-            ret_msg = defmsg.MSG_FEEDBACK_QUESTION_FR
-        else:
-            ret_msg = defmsg.MSG_FEEDBACK_QUESTION_EN
+        if typ in ['psy', 'drug', 'others']:
+            ret_msg = judge_lang(defmsg.MSG_FEEDBACK_QUESTION_DICT)
+        elif typ == 'joke':
+            ret_msg = 'a joke'
+            ret_opt = judge_lang(defopt.OPTION_RETURN_JOKE_DICT)
+        elif typ == 'back_lang':
+            ret_msg = defmsg.MSG_RE_WELCOME
+            ret_opt = defopt.OPTIONS_LANG
+        elif typ == 'back_type':
+            ret_msg = judge_lang(defmsg.MSG_FEEDBACK_WELCOME_DICT)
+            ret_opt = judge_lang(defopt.OPTIONS_TYPE_DICT)
     # feedback bye
     else:
         bye = ['Au revoir', '再见', 'Bye', '拜拜', 'bye',
@@ -80,33 +51,15 @@ def chat(msg, lang, typ):
         tks = ['谢谢', 'merci', 'Merci', 'Merci beaucoup', 'merci beaucoup',
                'Thanks', 'Thank you so much', 'thanks', 'thank you so much']
         if msg in bye:
-            if lang == 'zh':
-                ret_msg = defmsg.MSG_BYE_CH
-            elif lang == 'fr':
-                ret_msg = defmsg.MSG_BYE_FR
-            else:
-                ret_msg = defmsg.MSG_BYE_EN
+            ret_msg = judge_lang(defmsg.MSG_BYE_DICT)
         elif msg in emm:
-            if lang == 'zh':
-                ret_msg = defmsg.MSG_FEEDBACK_EMM_CH
-            elif lang == 'fr':
-                ret_msg = defmsg.MSG_FEEDBACK_EMM_FR
-            else:
-                ret_msg = defmsg.MSG_FEEDBACK_EMM_EN
+            ret_msg = judge_lang(defmsg.MSG_FEEDBACK_EMM_DICT)
         elif msg in tks:
-            if lang == 'zh':
-                ret_msg = defmsg.MSG_FEEDBACK_TKS_CH
-            elif lang == 'fr':
-                ret_msg = defmsg.MSG_FEEDBACK_TKS_FR
-            else:
-                ret_msg = defmsg.MSG_FEEDBACK_TKS_EN
+            ret_msg = judge_lang(defmsg.MSG_FEEDBACK_TKS_DICT)
         else:
-            if lang == 'fr':
-                ret_opt = OPTION_RETURN_FR
-            elif lang == 'ch':
-                ret_opt = OPTION_RETURN_CH
-            else:
-                ret_opt = OPTION_RETURN_EN
             ret_msg = communicate(msg, lang, typ)
+
+    if len(ret_opt) == 0:
+        ret_opt = judge_lang(defopt.OPTION_RETURN_DICT)
 
     return {'msg': ret_msg, 'options': ret_opt}
