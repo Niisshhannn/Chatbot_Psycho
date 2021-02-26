@@ -1,7 +1,7 @@
 import server.default_msg as defmsg
 from server.communication import communicate
 import server.default_opt as defopt
-
+from server.joke import get_joke
 
 # return a sentence according to language and type and what we say
 
