@@ -7,7 +7,6 @@ def joke(lang):
 
 # boutons
 
-
 OPTIONS_LANG = [{'key': 'fr', 'value': 'Français'},
                 {'key': 'zh', 'value': '中文'},
                 {'key': 'en', 'value': 'English'}]
@@ -22,6 +21,18 @@ OPTIONS_TYPE_EN = [{'key': 'psy', 'value': 'Psychology'},
                    {'key': 'drug', 'value': 'Drug'},
                    {'key': 'others', 'value': 'Others'},
                    {'key': 'joke', 'value': 'Jokes'}]
+OPTION_RETURN_CH = [{'key': 'back_lang', 'value': '重新选择语言'},
+                    {'key': 'back_type', 'value': '重新选择类型'}]
+OPTION_RETURN_FR = [{'key': 'back_lang', 'value': 'Rechoisir la langue'},
+                    {'key': 'back_type', 'value': 'Rechoisir le type'}]
+OPTION_RETURN_EN = [{'key': 'back_lang', 'value': 'Back to chose language'},
+                    {'key': 'back_type', 'value': 'Back to chose type'}]
+OPTION_RETURN_JOKE_FR = [{'key': 'back_lang', 'value': 'Rechoisir la langue'},
+                         {'key': 'back_type', 'value': 'Rechoisir le type'},
+                         {'key': 'joke', 'value': 'Une blague plus'}]
+OPTION_RETURN_EN = [{'key': 'back_lang', 'value': 'Back to chose language'},
+                    {'key': 'back_type', 'value': 'Back to chose type'},
+                    {'key': 'bakc_type', 'value': 'One more joke'}]
 
 # return a sentence according to language and type and what we say
 
@@ -90,6 +101,12 @@ def chat(msg, lang, typ):
             else:
                 ret_msg = defmsg.MSG_FEEDBACK_TKS_EN
         else:
+            if lang == 'fr':
+                ret_opt = OPTION_RETURN_FR
+            elif lang == 'ch':
+                ret_opt = OPTION_RETURN_CH
+            else:
+                ret_opt = OPTION_RETURN_EN
             ret_msg = communicate(msg, lang, typ)
 
     return {'msg': ret_msg, 'options': ret_opt}
