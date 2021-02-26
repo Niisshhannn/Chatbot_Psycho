@@ -29,12 +29,11 @@ export default {
 
 <style scoped>
 .chat-option {
-  width: 70%;
+  width: 100%;
   display: flex;
   box-sizing: border-box;
   padding: 0 8px 10px;
-  margin: 0 auto;
-  justify-content: space-around;
+  justify-content: center;
 }
 
 .opt-item {
@@ -48,5 +47,9 @@ export default {
   color: #fff;
   box-shadow: 0 0 10px rgb(0 0 0 / 15%);
   cursor: pointer;
+}
+
+.opt-item ~ .opt-item {
+  margin-left: 10px;
 }
 </style>

@@ -1,8 +1,6 @@
 <template>
   <div class="container">
-    <header>
-      Palette
-    </header>
+    <header>{{ title }}</header>
 
     <main ref="chatContent">
       <div class="content">
@@ -39,6 +37,7 @@ export default {
   },
   data() {
     return {
+      loading: false,
       msgList: [], // { msg: '', dir: 'left' }
       options: [],
       lang: "en", // 保存用户的语言
@@ -58,12 +57,22 @@ export default {
       });
     },
   },
+  computed: {
+    title() {
+      if (!this.loading) return "Palette";
+      if (this.lang === "zh") return "正在输入...";
+      if (this.lang === "fr") return "écrit...";
+      return "writing...";
+    },
+  },
   mounted() {
     // 第一句
     this.chat("#init");
   },
   methods: {
     chat(msg, lang, type) {
+      // 调用接口
+      this.loading = true;
       apiChat(msg, lang, type).then(this.handleResponse.bind(this));
     },
     handleSend(value) {
@@ -84,6 +93,7 @@ export default {
     },
     // 处理chatbot的回复
     handleResponse(res) {
+      this.loading = false;
       const { msg, options = [] } = res;
       this.msgList.push({ msg: msg, dir: "left" });
       this.options = options;
