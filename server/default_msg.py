@@ -31,6 +31,12 @@ MSG_FEEDBACK_QUESTION_EN = "Now you can entrer your questions"
 
 MSG_ERROR = "Sorry, I've met somes problems, I'll ask my mama and papa for help me."
 
+MSG_EMM_FR = "emm, laissez-moi réfléchir un peu"
+
+MSG_EMM_CH = "让我思考一下怎么回答您"
+
+MSG_EMM_EN = "emmm, please let me think about it for a minute"
+
 MSG_FEEDBACK_EMM_EN = "What do you mean ?"
 
 MSG_FEEDBACK_EMM_FR = "Qu'est-ce que vous voulez dire ?"
