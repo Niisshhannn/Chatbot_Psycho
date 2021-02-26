@@ -23,8 +23,8 @@ OPTIONS_TYPE_DICT = {
 OPTION_RETURN_DICT = {
     'zh': [{'key': 'back_lang', 'value': '更换语言'},
            {'key': 'back_type', 'value': '更换类型'}],
-    'fr': [{'key': 'back_lang', 'value': 'Changer langue'},
-           {'key': 'back_type', 'value': 'Changer type'}],
+    'fr': [{'key': 'back_lang', 'value': 'Changer la langue'},
+           {'key': 'back_type', 'value': 'Changer le type'}],
     'en': [{'key': 'back_lang', 'value': 'Change language'},
            {'key': 'back_type', 'value': 'Change type'}]
 }
@@ -32,7 +32,7 @@ OPTION_RETURN_DICT = {
 OPTION_RETURN_JOKE_DICT = {
     'fr': [{'key': 'back_lang', 'value': 'Changer langue'},
            {'key': 'back_type', 'value': 'Changer type'},
-           {'key': 'joke', 'value': 'Une blague plus'}],
+           {'key': 'joke', 'value': 'Une blague de plus'}],
     'en': [{'key': 'back_lang', 'value': 'Change language'},
            {'key': 'back_type', 'value': 'Change type'},
            {'key': 'joke', 'value': 'One more joke'}]
