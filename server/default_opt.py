@@ -30,8 +30,8 @@ OPTION_RETURN_DICT = {
 }
 
 OPTION_RETURN_JOKE_DICT = {
-    'fr': [{'key': 'back_lang', 'value': 'Changer langue'},
-           {'key': 'back_type', 'value': 'Changer type'},
+    'fr': [{'key': 'back_lang', 'value': 'Changer la langue'},
+           {'key': 'back_type', 'value': 'Changer le type'},
            {'key': 'joke', 'value': 'Une blague de plus'}],
     'en': [{'key': 'back_lang', 'value': 'Change language'},
            {'key': 'back_type', 'value': 'Change type'},
