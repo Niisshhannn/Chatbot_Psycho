@@ -49,7 +49,7 @@ def chat(msg, lang, typ):
                'byebye', 'au revoir', 'salut', 'Salut']
         emm = ['emmmmm', 'emm', 'emmm', 'emmmm', 'euh', '呃', 'Euh']
         tks = ['谢谢', 'merci', 'Merci', 'Merci beaucoup', 'merci beaucoup',
-               'Thanks', 'Thank you so much', 'thanks', 'thank you so much']
+               'Thanks', 'Thank you so much', 'thanks', 'thank you so much', 'thanks', 'thank you', '谢啦', '谢谢啦', 'Merci!', 'Merci beaucoup!']
         if msg in bye:
             ret_msg = judge_lang(defmsg.MSG_BYE_DICT)
         elif msg in emm:
