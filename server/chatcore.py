@@ -35,7 +35,7 @@ def chat(msg, lang, typ):
         if typ in ['psy', 'drug', 'others']:
             ret_msg = judge_lang(defmsg.MSG_FEEDBACK_QUESTION_DICT)
         elif typ == 'joke':
-            ret_msg = 'a joke'
+            ret_msg = get_joke(lang)
             ret_opt = judge_lang(defopt.OPTION_RETURN_JOKE_DICT)
         elif typ == 'back_lang':
             ret_msg = defmsg.MSG_RE_WELCOME
