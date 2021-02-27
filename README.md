@@ -18,11 +18,12 @@ The project aims to create a chatbot for spiritual counseling. The project was c
 ![Image text](img-folder/feedback_special.png)
 
 ## Explication
+
 1. `data` Database
 2. `model` Model training
-3. `server`Web server and application python code
-4. `train` Python code for chatbot
-5. `web` Projet web
+3. `server` (back-end) Web server and application python code for chatbot
+4. `train` some codes original for chatbot
+5. `web` (front-end) Project web
 6. `app.py` Run server
 
 
