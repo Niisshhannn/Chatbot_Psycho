@@ -9,7 +9,7 @@ The project aims to create a chatbot for spiritual counseling. The project was c
 ![Image text](img-folder/chose_type.png)
 
 ## Example 3: communication page
-![Image text](img-folder/communication.png)
+![Image text](img-folder/communication_page.png)
 
 ## Example 4: joke page
 ![Image text](img-folder/joke_page.png)
