@@ -17,7 +17,9 @@ The project aims to create a chatbot for spiritual counseling. The project was c
 ## Example 5: some feedback special
 ![Image text](img-folder/feedback_special.png)
 
-## Explication
+# Explications
+
+## Files
 
 1. `data` Database
 2. `model` Model training
@@ -27,7 +29,7 @@ The project aims to create a chatbot for spiritual counseling. The project was c
 6. `app.py` Run server
 
 
-## How to run Front-end
+## How to run project of Front-end
 
 1. install Node from [website official](https://nodejs.org/en/),please install version-LTS
 2. cd to web
@@ -36,7 +38,7 @@ The project aims to create a chatbot for spiritual counseling. The project was c
 5. run`npm run serve`
 6. open your web browser with `http://localhost:8080`
 
-## How to run the full projet
+## How to run the full project
 
 1. cd to web
 2. run `npm run build` to pack the front-end
