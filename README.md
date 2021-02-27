@@ -2,21 +2,6 @@
 
 The project aims to create a chatbot for spiritual counseling. The project was created by Can Cui and Nishan Tang of the Sorbonne University. The goal is to bring light and hope to people who are suffering from mental illness or potential patients. Our baby robot is fed with love and sweat, and we hope you will treat it well.
 
-## Example 1: welcom page - chose language
-![Image text](img-folder/welcome_page.png)
-
-## Example 2: buttons for chosing type
-![Image text](img-folder/chose_type.png)
-
-## Example 3: communication page
-![Image text](img-folder/communication_page_ex.png)
-
-## Example 4: joke page
-![Image text](img-folder/joke_fr.png)
-
-## Example 5: some feedback special
-![Image text](img-folder/feedback_special.png)
-
 # Explications
 
 ## Files
@@ -45,3 +30,21 @@ The project aims to create a chatbot for spiritual counseling. The project was c
 3. cd to root with the command `cd ..` 
 4. run server with command `python app.py` or `python3 app.py` for python3
 5. open your web browser with `http://localhost:5000`
+
+# Some Examples
+
+## Example 1: welcom page - chose language
+![Image text](img-folder/welcome_page.png)
+
+## Example 2: buttons for chosing type
+![Image text](img-folder/chose_type.png)
+
+## Example 3: communication page
+![Image text](img-folder/communication_page_ex.png)
+
+## Example 4: joke page
+![Image text](img-folder/joke_fr.png)
+
+## Example 5: some feedback special
+![Image text](img-folder/feedback_special.png)
+
